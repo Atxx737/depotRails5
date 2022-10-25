@@ -1,0 +1,27 @@
+<h1>Đơn hàng từ Chủ Shop Ao Minh Hiếu (HiếuAM)</h1>
+<h2>Xin chào <%= @order.name %></h2>
+<h3>Đây là thông tin đơn hàng của bạn:</h3>
+<hr>
+<table style="border: 1px solid black; algin: center">
+  <tr style="border: 1px solid black">
+    <th>Tên Sách</th>
+    <th>Số Lượng</th>
+    <th>Tiền</th>
+  </tr>
+  <% @order.line_items.each do |line_item| -%>
+    <tr>
+      <td> <%= line_item.product.title %> </td>
+      <td> <%= line_item.quantity %></td>
+      <td class="item_price"><%= number_to_currency(line_item.total_price) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td colspan="2"><b>Tổng Tiền</b></td>
+    <td>
+      <b><%= number_to_currency(@order.line_items.to_a.sum { |line_item| line_item.total_price }) %></tr>
+    </b>
+  </td>
+</table>
+<p>
+  Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!
+</p>
